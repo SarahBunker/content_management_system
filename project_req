@@ -1,3 +1,23 @@
 1. When a user visits the path "/", the application should display the text "Getting started."
 What: displaying "Getting started." from the url path "/"
 How: create a route to "/" using GET method.
+
+2. When a user visits the home page, they should see a list of the documents in the CMS: history.txt, changes.txt and about.txt
+other information: Each document within the CMS will have a name that includes an extension. This extension will determine how the contents of the page are displayed in later steps.
+What: Home page shows a list of documents. Document name includes an extension that will be used later. Documents are sorted alphabetically. Documents are shown in an unordered list format.
+How:
+- view pages have .erb extension
+- create a layout template with boilerplate code
+- yield to view page in the body
+- create a view page for the index page
+- in the view page create an unordered list and itterate through items in documents to print out their names.
+- define the before method
+  - create a key in the session object called documents.
+  - For now add a value that is an array with three items in the array. with text values of the known document names.
+- in the home path define an instance variable for the documents
+  - sort the documents
+- tell page to load the view with the layout
+
+
+Likely do later
+- add links to document names to the document.

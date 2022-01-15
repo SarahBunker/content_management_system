@@ -18,6 +18,29 @@ How:
   - sort the documents
 - tell page to load the view with the layout
 
+Refining:
+- documents are actually txt files in the tree
+  - create a directory called data
+  - add three documents to the folder
+- Use methods from File and Dir classes to get the list of documents and file paths
+  - add links to document names to the document.
 
-Likely do later
-- add links to document names to the document.
+likely later:
+- create views for documents based on file extension
+
+3. Viewing Text Files:
+ - When a user visits the index page, they are presented with a list of links, one for each document in the CMS.
+ - When a user clicks on a document link in the index, they should be taken to a page that displays the content of the file whose name was clicked.
+ - When a user visits the path /history.txt, they will be presented with the content of the document history.txt.
+ - The browser should render a text file as a plain text file.
+Other information:  Add data to sample files in directory
+
+What: Add links to the documents. Add Route with Url "/FILENAME". Links show text file documents as plain text file
+How:
+frontend
+- add links to document name with href based on name
+- add view for viewing text file
+backend
+- add route to document
+    - GET
+    - document name will be a parameter in the URL

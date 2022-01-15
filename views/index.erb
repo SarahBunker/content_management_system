@@ -1,7 +1,5 @@
 <ul>
   <% @files.each do |file| %>
-    <li>
-      <p><%= file %></p>
-    </li>
+    <li><a href="/<%= file %>"><p><%= file %></p></a></li>
   <% end %>
 </ul>

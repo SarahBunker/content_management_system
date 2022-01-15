@@ -1,0 +1,103 @@
+1801: Joseph Marie Jacquard, a French merchant and inventor invents a loom that uses punched wooden cards to automatically weave fabric designs. Early computers would use similar punch cards.
+
+1821: English mathematician Charles Babbage conceives of a steam-driven calculating machine that would be able to compute tables of numbers. Funded by the British government, the project, called the "Difference Engine" fails due to the lack of technology at the time, according to the University of Minnesota.
+
+1848: Ada Lovelace, an English mathematician and the daughter of poet Lord Byron, writes the world's first computer program. According to Anna Siffert, a professor of theoretical mathematics at the University of Münster in Germany, Lovelace writes the first program while translating a paper on Babbage's Analytical Engine from French into English. "She also provides her own comments on the text. Her annotations, simply called "notes," turn out to be three times as long as the actual transcript," Siffert wrote in an article for The Max Planck Society. "Lovelace also adds a step-by-step description for computation of Bernoulli numbers with Babbage's machine — basically an algorithm — which, in effect, makes her the world's first computer programmer." Bernoulli numbers are a sequence of rational numbers often used in computation.
+
+1853: Swedish inventor Per Georg Scheutz and his son Edvard design the world's first printing calculator. The machine is significant for being the first to "compute tabular differences and print the results," according to Uta C. Merzbach's book, "Georg Scheutz and the First Printing Calculator" (Smithsonian Institution Press, 1977).
+
+1890: Herman Hollerith designs a punch-card system to help calculate the 1890 U.S. Census. The machine,  saves the government several years of calculations, and the U.S. taxpayer approximately $5 million, according to Columbia University  Hollerith later establishes a company that will eventually become International Business Machines Corporation (IBM).
+
+1931: At the Massachusetts Institute of Technology (MIT), Vannevar Bush invents and builds the Differential Analyzer, the first large-scale automatic general-purpose mechanical analog computer, according to Stanford University.
+
+1936: Alan Turing, a British scientist and mathematician, presents the principle of a universal machine, later called the Turing machine, in a paper called "On Computable Numbers…" according to Chris Bernhardt's book "Turing's Vision" (The MIT Press, 2017). Turing machines are capable of computing anything that is computable. The central concept of the modern computer is based on his ideas. Turing is later involved in the development of the Turing-Welchman Bombe, an electro-mechanical device designed to decipher Nazi codes during World War II, according to the UK's National Museum of Computing.
+
+1937: John Vincent Atanasoff, a professor of physics and mathematics at Iowa State University, submits a grant proposal to build the first electric-only computer, without using gears, cams, belts or shafts.
+
+1939: David Packard and Bill Hewlett found the Hewlett Packard Company in Palo Alto, California. The pair decide the name of their new company by the toss of a coin, and Hewlett-Packard's first headquarters are in Packard's garage, according to MIT.
+
+1941: German inventor and engineer Konrad Zuse completes his Z3 machine, the world's earliest digital computer, according to Gerard O'Regan's book "A Brief History of Computing" (Springer, 2021). The machine was destroyed during a bombing raid on Berlin during World War II. Zuse fled the German capital after the defeat of Nazi Germany and later released the world's first commercial digital computer, the Z4, in 1950, according to O'Regan.
+
+1941: Atanasoff and his graduate student, Clifford Berry, design the first digital electronic computer in the U.S., called the Atanasoff-Berry Computer (ABC). This marks the first time a computer is able to store information on its main memory, and is capable of performing one operation every 15 seconds, according to the book "Birthing the Computer" (Cambridge Scholars Publishing, 2016)
+
+1945: Two professors at the University of Pennsylvania, John Mauchly and J. Presper Eckert, design and build the Electronic Numerical Integrator and Calculator (ENIAC). The machine is the first "automatic, general-purpose, electronic, decimal, digital computer," according to Edwin D. Reilly's book "Milestones in Computer Science and Information Technology" (Greenwood Press, 2003).
+
+1946: Mauchly and Presper leave the University of Pennsylvania and receive funding from the Census Bureau to build the UNIVAC, the first commercial computer for business and government applications.
+
+1947: William Shockley, John Bardeen and Walter Brattain of Bell Laboratories invent the transistor. They discover how to make an electric switch with solid materials and without the need for a vacuum.
+
+1949: A team at the University of Cambridge develops the Electronic Delay Storage Automatic Calculator (EDSAC), "the first practical stored-program computer," according to O'Regan. "EDSAC ran its first program in May 1949 when it calculated a table of squares and a list of prime numbers," O'Regan wrote. In November 1949, scientists with the Council of Scientific and Industrial Research (CSIR), now called CSIRO, build Australia's first digital computer called the Council for Scientific and Industrial Research Automatic Computer (CSIRAC). CSIRAC is the first digital computer in the world to play music, according to O'Regan.
+
+1953: Grace Hopper develops the first computer language, which eventually becomes known as COBOL, which stands for COmmon, Business-Oriented Language according to the National Museum of American History. Hopper is later dubbed the "First Lady of Software" in her posthumous Presidential Medal of Freedom citation. Thomas Johnson Watson Jr., son of IBM CEO Thomas Johnson Watson Sr., conceives the IBM 701 EDPM to help the United Nations keep tabs on Korea during the war.
+
+1954: John Backus and his team of programmers at IBM publish a paper describing their newly created FORTRAN programming language, an acronym for FORmula TRANslation, according to MIT.
+
+1958: Jack Kilby and Robert Noyce unveil the integrated circuit, known as the computer chip. Kilby is later awarded the Nobel Prize in Physics for his work.
+
+1968: Douglas Engelbart reveals a prototype of the modern computer at the Fall Joint Computer Conference, San Francisco. His presentation, called "A Research Center for Augmenting Human Intellect" includes a live demonstration of his computer, including a mouse and a graphical user interface (GUI), according to the Doug Engelbart Institute. This marks the development of the computer from a specialized machine for academics to a technology that is more accessible to the general public.
+
+1969: Ken Thompson, Dennis Ritchie and a group of other developers at Bell Labs produce UNIX, an operating system that made "large-scale networking of diverse computing systems — and the internet — practical," according to Bell Labs.. The team behind UNIX continued to develop the operating system using the C programming language, which they also optimized.
+
+1970: The newly formed Intel unveils the Intel 1103, the first Dynamic Access Memory (DRAM) chip.
+
+1971: A team of IBM engineers led by Alan Shugart invents the "floppy disk," enabling data to be shared among different computers.
+
+1972: Ralph Baer, a German-American engineer, releases Magnavox Odyssey, the world's first home game console, in September 1972 , according to the Computer Museum of America. Months later, entrepreneur Nolan Bushnell and engineer Al Alcorn with Atari release Pong, the world's first commercially successful video game.
+
+1973: Robert Metcalfe, a member of the research staff for Xerox, develops Ethernet for connecting multiple computers and other hardware.
+
+1977: The Commodore Personal Electronic Transactor (PET), is released onto the home computer market, featuring an MOS Technology 8-bit 6502 microprocessor, which controls the screen, keyboard and cassette player. The PET is especially successful in the education market, according to O'Regan.
+
+1975: The magazine cover of the January issue of "Popular Electronics" highlights the Altair 8080 as the "world's first minicomputer kit to rival commercial models." After seeing the magazine issue, two "computer geeks," Paul Allen and Bill Gates, offer to write software for the Altair, using the new BASIC language. On April 4, after the success of this first endeavor, the two childhood friends form their own software company, Microsoft.
+
+1976: Steve Jobs and Steve Wozniak co-found Apple Computer on April Fool's Day. They unveil Apple I, the first computer with a single-circuit board and ROM (Read Only Memory), according to MIT.
+
+1977: Radio Shack began its initial production run of 3,000 TRS-80 Model 1 computers — disparagingly known as the "Trash 80" — priced at $599, according to the National Museum of American History. Within a year, the company took 250,000 orders for the computer, according to the book "How TRS-80 Enthusiasts Helped Spark the PC Revolution" (The Seeker Books, 2007).
+
+1977: The first West Coast Computer Faire is held in San Francisco. Jobs and Wozniak present the Apple II computer at the Faire, which includes color graphics and features an audio cassette drive for storage.
+
+1978: VisiCalc, the first computerized spreadsheet program is introduced.
+
+1979: MicroPro International, founded by software engineer Seymour Rubenstein, releases WordStar, the world's first commercially successful word processor. WordStar is programmed by Rob Barnaby, and includes 137,000 lines of code, according to Matthew G. Kirschenbaum's book "Track Changes: A Literary History of Word Processing" (Harvard University Press, 2016).
+
+1981: "Acorn," IBM's first personal computer, is released onto the market at a price point of $1,565, according to IBM. Acorn uses the MS-DOS operating system from Windows. Optional features include a display, printer, two diskette drives, extra memory, a game adapter and more.
+
+1983: The Apple Lisa, standing for "Local Integrated Software Architecture" but also the name of Steve Jobs' daughter, according to the National Museum of American History (NMAH), is the first personal computer to feature a GUI. The machine also includes a drop-down menu and icons. Also this year, the Gavilan SC is released and is the first portable computer with a flip-form design and the very first to be sold as a "laptop."
+
+1984: The Apple Macintosh is announced to the world during a Superbowl advertisement. The Macintosh is launched with a retail price of $2,500, according to the NMAH.
+
+1985: As a response to the Apple Lisa's GUI, Microsoft releases Windows in November 1985, the Guardian reported. Meanwhile, Commodore announces the Amiga 1000.
+
+1989: Tim Berners-Lee, a British researcher at the European Organization for Nuclear Research (CERN), submits his proposal for what would become the World Wide Web. His paper details his ideas for Hyper Text Markup Language (HTML), the building blocks of the Web.
+
+1993: The Pentium microprocessor advances the use of graphics and music on PCs.
+
+1996: Sergey Brin and Larry Page develop the Google search engine at Stanford University.
+
+1997: Microsoft invests $150 million in Apple, which at the time is struggling financially.  This investment ends an ongoing court case in which Apple accused Microsoft of copying its operating system.
+
+1999: Wi-Fi, the abbreviated term for "wireless fidelity" is developed, initially covering a distance of up to 300 feet (91 meters) Wired reported.
+
+2001: Mac OS X, later renamed OS X then simply macOS, is released by Apple as the successor to its standard Mac Operating System. OS X goes through 16 different versions, each with "10" as its title, and the first nine iterations are nicknamed after big cats, with the first being codenamed "Cheetah," TechRadar reported.
+
+2003: AMD's Athlon 64, the first 64-bit processor, is released to customers.
+
+2004: The Mozilla Corporation launches Mozilla Firefox 1.0. The Web browser is one of the first major challenges to Internet Explorer, owned by Microsoft. During its first five years, Firefox exceeded a billion downloads by users, according to the Web Design Museum.
+
+2005: Google buys Android, a Linux-based mobile phone operating system
+
+2006: The MacBook Pro from Apple hits the shelves. The Pro is the company's first Intel-based, dual-core mobile computer.
+
+2009: Microsoft launches Windows 7 on July 22. The new operating system features the ability to pin applications to the taskbar, scatter windows away by shaking another window, easy-to-access jumplists, easier previews of tiles and more, TechRadar reported.
+
+2010: The iPad, Apple's flagship handheld tablet, is unveiled.
+
+2011: Google releases the Chromebook, which runs on Google Chrome OS.
+
+2015: Apple releases the Apple Watch. Microsoft releases Windows 10.
+
+2016: The first reprogrammable quantum computer was created. "Until now, there hasn't been any quantum-computing platform that had the capability to program new algorithms into their system. They're usually each tailored to attack a particular algorithm," said study lead author Shantanu Debnath, a quantum physicist and optical engineer at the University of Maryland, College Park.
+
+2017: The Defense Advanced Research Projects Agency (DARPA) is developing a new "Molecular Informatics" program that uses molecules as computers. "Chemistry offers a rich set of properties that we may be able to harness for rapid, scalable information storage and processing," Anne Fischer, program manager in DARPA's Defense Sciences Office, said in a statement. "Millions of molecules exist, and each molecule has a unique three-dimensional atomic structure as well as variables such as shape, size, or even color. This richness provides a vast design space for exploring novel and multi-value ways to encode and process data beyond the 0s and 1s of current logic-based, digital architectures."
+
+source: https://www.livescience.com/20718-computer-history.html

@@ -5,6 +5,7 @@ GEM
     backports (3.23.0)
     builder (3.2.4)
     erubis (2.7.0)
+    fileutils (1.6.0)
     minitest (5.15.0)
     minitest-reporters (1.5.0)
       ansi
@@ -37,6 +38,7 @@ PLATFORMS
 
 DEPENDENCIES
   erubis
+  fileutils
   minitest
   minitest-reporters
   rack-test

@@ -11,3 +11,5 @@ gem 'minitest-reporters'
 gem "rack-test"
 
 gem "redcarpet"
+
+gem "fileutils"

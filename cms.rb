@@ -13,18 +13,6 @@ end
 
 root = File.expand_path("..", __FILE__)
 
-get '/' do
-  @files = Dir.glob(root + "/data/*").map do |path|
-    File.basename(path)
-  end
-
-  erb :index
-end
-
-def error_for_file_path(filename)
-  "#{filename}: does not exist" if File.file?(filename)
-end
-
 def render_markdown(file)
   markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
   markdown.render(file)
@@ -41,8 +29,29 @@ def load_file_content(path)
   end
 end
 
+def data_path
+  if ENV["RACK_ENV"] == "test"
+    File.expand_path("../test/data", __FILE__)
+  else
+    File.expand_path("../data", __FILE__)
+  end
+end
+
+get '/' do
+  pattern = File.join(data_path, "*")
+  @files = Dir.glob(pattern).map do |path|
+    File.basename(path)
+  end
+
+  erb :index
+end
+
+def error_for_file_path(filename)
+  "#{filename}: does not exist" if File.file?(filename)
+end
+
 get '/:filename' do
-  file_path = root + "/data/" + params[:filename]
+  file_path = File.join(data_path, params[:filename])
   if File.file?(file_path)
     load_file_content(file_path)
   else
@@ -53,7 +62,7 @@ end
 
 get "/:filename/edit" do
   @filename = params[:filename]
-  file_path = root + "/data/" + @filename
+  file_path = File.join(data_path, @filename)
   if File.file?(file_path)
     @content = File.read(file_path)
 
@@ -66,7 +75,7 @@ end
 
 post "/:filename" do
   @filename = params[:filename]
-  file_path = root + "/data/" + @filename
+  file_path = File.join(data_path, @filename)
 
   File.write(file_path, params[:content])
 

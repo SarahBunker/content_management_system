@@ -3,15 +3,13 @@
   <head>
     <title>Document Control</title>
     <meta charset="UTF-8"/>
+    <!--<link rel="stylesheet" href="/stylesheets/whitespace-reset.css">-->
+    <link rel="stylesheet" href="/stylesheets/application.css">
   </head>
   <body>
     <% if session[:message] %>
-      <div>
-        <p><%= session.delete(:message) %> </p>
-      </div>
+      <p class="message"><%= session.delete(:message) %> </p>
     <% end %>
-    <main>
-      <%= yield %>
-    </main>
+    <%= yield %>
   </body>
 </htm>

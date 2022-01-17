@@ -25,7 +25,7 @@ def load_file_content(path)
     headers["Content-Type"] = "text/plain"
     content
   when ".md"
-    render_markdown(content)
+    erb render_markdown(content)
   end
 end
 
@@ -50,6 +50,28 @@ def error_for_file_path(filename)
   "#{filename}: does not exist" if File.file?(filename)
 end
 
+get "/new" do
+  erb :new
+end
+
+post "/create" do
+  @filename = params[:filename].to_s.strip
+
+  if @filename.size == 0
+    session[:message] = "A name is required."
+    status 422
+    erb :new
+  else
+    @filename = "#{@filename}.txt" if File.extname(@filename) == ""
+    file_path = File.join(data_path, @filename)
+
+    File.write(file_path, "")
+    session[:message] = "#{params[:filename]} was created."
+
+    redirect "/"
+  end
+end
+
 get '/:filename' do
   file_path = File.join(data_path, params[:filename])
   if File.file?(file_path)
@@ -71,6 +93,17 @@ get "/:filename/edit" do
     session[:message] = "#{params[:filename]} does not exist"
     redirect "/"
   end
+end
+
+post "/:filename/delete" do
+  @filename = params[:filename]
+  file_path = File.join(data_path, @filename)
+
+  File.delete(file_path)
+
+  session[:message] = "#{params[:filename]} has been deleted."
+
+  redirect "/"
 end
 
 post "/:filename" do

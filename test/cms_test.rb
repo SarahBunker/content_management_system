@@ -21,18 +21,20 @@ class CmsTest < Minitest::Test # tests defined in a class that inherits from min
     body = last_response.body
     assert_includes body, "history.txt"
     assert_includes body, "changes.txt"
-    assert_includes body, "about.txt"
+    assert_includes body, "about.md"
   end
 
   def test_file_about
-    get "/about.txt"
+    get "/about.md"
     assert_equal 200, last_response.status
-    assert_equal "text/plain", last_response["Content-Type"]
+    assert_equal "text/html;charset=utf-8", last_response["Content-Type"]
     body = last_response.body
     assert_includes body, "Bruno, no, no, no"
   end
 
   def test_file_changes
+    post "/changes.txt", content: "Macro-economic assessments of climate impacts"
+
     get "/changes.txt"
     assert_equal 200, last_response.status
     assert_equal "text/plain", last_response["Content-Type"]
@@ -58,5 +60,28 @@ class CmsTest < Minitest::Test # tests defined in a class that inherits from min
 
     get "/"
     refute_includes last_response.body, "notafile.txt does not exist"
+  end
+
+  def test_editing_document
+    get "/changes.txt/edit"
+
+    assert_equal 200, last_response.status
+    assert_includes last_response.body, "<textarea"
+    assert_includes last_response.body, %q(<button type="submit")
+  end
+
+  def test_updating_document
+    post "/changes.txt", content: "new content"
+
+    assert_equal 302, last_response.status
+
+    get last_response["Location"]
+
+    assert_includes last_response.body, "changes.txt has been updated"
+
+    get "/changes.txt"
+
+    assert_equal 200, last_response.status
+    assert_includes last_response.body, "new content"
   end
 end

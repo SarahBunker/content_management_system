@@ -51,17 +51,25 @@ get '/:filename' do
   end
 end
 
-get '/:filename/md' do
-
-  file_path = root + "/data/" + params[:filename]
+get "/:filename/edit" do
+  @filename = params[:filename]
+  file_path = root + "/data/" + @filename
   if File.file?(file_path)
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-    @file = File.read(file_path)
-    markdown.render(@file)
+    @content = File.read(file_path)
+
+    erb :file_edit
   else
     session[:message] = "#{params[:filename]} does not exist"
     redirect "/"
   end
 end
 
+post "/:filename" do
+  @filename = params[:filename]
+  file_path = root + "/data/" + @filename
 
+  File.write(file_path, params[:content])
+
+  session[:message] = "#{params[:filename]} has been updated."
+  redirect "/"
+end

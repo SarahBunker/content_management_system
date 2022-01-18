@@ -33,6 +33,10 @@ class CmsTest < Minitest::Test # tests defined in a class that inherits from min
     last_request.env["rack.session"]
   end
 
+  def admin_session
+    { "rack.session" => { username: "admin", password: "secret" } }
+  end
+
   def test_initial_page
     get "/"
     assert_equal 200, last_response.status
@@ -127,8 +131,7 @@ class CmsTest < Minitest::Test # tests defined in a class that inherits from min
   def test_editing_document
     create_document "changes.txt"
 
-    post "/users/signin", username: "admin", password: "secret"
-    get "/changes.txt/edit"
+    get "/changes.txt/edit", {}, admin_session
 
     assert_equal 200, last_response.status
     assert_includes last_response.body, "<textarea"
@@ -136,7 +139,7 @@ class CmsTest < Minitest::Test # tests defined in a class that inherits from min
   end
 
   def test_updating_document
-    post "/changes.txt", content: "new content"
+    post "/changes.txt", {content: "new content"}, admin_session
 
     assert_equal 302, last_response.status
     assert_equal "changes.txt has been updated.", session[:message]
@@ -149,7 +152,7 @@ class CmsTest < Minitest::Test # tests defined in a class that inherits from min
   def test_deleting_document
     create_document("test.txt")
 
-    post"/test.txt/delete"
+    post"/test.txt/delete", {}, admin_session
     assert_equal 302, last_response.status
     assert_equal "test.txt has been deleted.", session[:message]
 
@@ -157,8 +160,14 @@ class CmsTest < Minitest::Test # tests defined in a class that inherits from min
     refute_includes last_response.body, %q(href="/test.txt")
   end
 
+  def test_view_new_document_page
+    get "/new", {}, admin_session
+    assert_equal 200, last_response.status
+    assert_includes last_response.body, "Add a new document:"
+  end
+
   def test_create_new_document
-    post "/create", filename: "test.txt"
+    post "/create", {filename: "test.txt"}, admin_session
     assert_equal 302, last_response.status
     assert_equal "test.txt has been created.", session[:message]
 
@@ -167,8 +176,37 @@ class CmsTest < Minitest::Test # tests defined in a class that inherits from min
   end
 
   def test_create_new_document_without_filename
-    post "/create", filename: ""
+    post "/create", {filename: ""}, admin_session
     assert_equal 422, last_response.status
     assert_includes last_response.body, "A name is required"
+  end
+
+  def test_edit_page_signed_out_user
+    create_document "changes.txt"
+
+    get "/changes.txt/edit"
+
+    assert_equal 302, last_response.status
+    assert_equal "You must be signed in to do that.", session[:message]
+  end
+
+  def test_submit_changes_signed_out_user
+    post "/changes.txt", {content: "new content"}
+
+    assert_equal 302, last_response.status
+    assert_equal "You must be signed in to do that.", session[:message]
+  end
+
+  def test_viewing_new_document_signed_out_user
+    get "/new", {}
+
+    assert_equal 302, last_response.status
+    assert_equal "You must be signed in to do that.", session[:message]
+  end
+
+  def test_creating_new_document_signed_out_user
+    post "/create", {filename: "test.txt"}
+    assert_equal 302, last_response.status
+    assert_equal "You must be signed in to do that.", session[:message]
   end
 end

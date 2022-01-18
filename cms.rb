@@ -47,6 +47,14 @@ def valid_sign_in?(username, password)
   USERS[username] && USERS[username] == password
 end
 
+
+def restricted_action_check
+  unless signed_in?
+    session[:message] = "You must be signed in to do that."
+    redirect "/"
+  end
+end
+
 get '/' do
   pattern = File.join(data_path, "*")
   @files = Dir.glob(pattern).map do |path|
@@ -61,10 +69,14 @@ def error_for_file_path(filename)
 end
 
 get "/new" do
+  restricted_action_check
+
   erb :new
 end
 
 post "/create" do
+  restricted_action_check
+
   @filename = params[:filename].to_s.strip
 
   if @filename.size == 0
@@ -123,6 +135,8 @@ get '/:filename' do
 end
 
 get "/:filename/edit" do
+  restricted_action_check
+
   @filename = params[:filename]
   file_path = File.join(data_path, @filename)
   if File.file?(file_path)
@@ -136,6 +150,8 @@ get "/:filename/edit" do
 end
 
 post "/:filename/delete" do
+  restricted_action_check
+
   @filename = params[:filename]
   file_path = File.join(data_path, @filename)
 
@@ -147,6 +163,8 @@ post "/:filename/delete" do
 end
 
 post "/:filename" do
+  restricted_action_check
+
   @filename = params[:filename]
   file_path = File.join(data_path, @filename)
 

@@ -29,22 +29,34 @@ class CmsTest < Minitest::Test # tests defined in a class that inherits from min
     end
   end
 
-  def test_sign_in
+  def session
+    last_request.env["rack.session"]
+  end
+
+  def test_initial_page
     get "/"
     assert_equal 200, last_response.status
     assert_includes last_response.body, "Sign In"
+  end
 
+  def test_sign_form
     get "/users/signin"
     assert_equal 200, last_response.status
     assert_includes last_response.body, "Username"
     assert_includes last_response.body, "Password"
+    assert_includes last_response.body, "<input"
+    assert_includes last_response.body, %q(<button type="submit")
+  end
 
+  def test_sign_in
     post "/users/signin", username: "admin", password: "secret"
     assert_equal 302, last_response.status
+    assert_equal "Welcome", session[:message]
+    assert_equal "admin", session[:username]
 
     get last_response["Location"]
     assert_equal 200, last_response.status
-    assert_includes last_response.body, "Welcome"
+    assert_includes last_response.body, "Signed in as admin"
   end
 
   def test_sign_in_bad_credentials
@@ -52,14 +64,18 @@ class CmsTest < Minitest::Test # tests defined in a class that inherits from min
     assert_equal 422, last_response.status
     assert_includes last_response.body, "Invalid credentials"
     assert_includes last_response.body, "admin"
+    assert_nil session[:username]
   end
 
   def test_sign_out
-    post "/users/signin", username: "admin", password: "secret"
-    get last_response["Location"]
+    get "/", {}, {"rack.session" => {username: "admin", password: "secret" } }
+    assert_includes last_response.body, "Signed in as admin"
+
     post "/users/signout"
+    assert_equal "You have been signed out.", session[:message]
+
     get last_response["Location"]
-    assert_includes last_response.body, "You have been signed out"
+    assert_nil session[:username]
     assert_includes last_response.body, "Sign In"
   end
 
@@ -68,7 +84,6 @@ class CmsTest < Minitest::Test # tests defined in a class that inherits from min
     create_document "changes.txt"
     create_document "history.txt"
 
-    post "/users/signin", username: "admin", password: "secret"
     get "/"
     assert_equal 200, last_response.status # response to request availbe using #last_response, returns an instance with methods #status, body and [] (for accessing headers)
     assert_equal "text/html;charset=utf-8", last_response["Content-Type"]
@@ -91,25 +106,20 @@ class CmsTest < Minitest::Test # tests defined in a class that inherits from min
 
 
   def test_viewing_text_file
-    create_document "history.txt", "the two childhood friends form their own software company, Microsoft"
+    create_document "history.txt", "the two childhood friends"
 
-    post "/users/signin", username: "admin", password: "secret"
     get "/history.txt"
     assert_equal 200, last_response.status
     assert_equal "text/plain", last_response["Content-Type"]
-    body = last_response.body
-    assert_includes body, "the two childhood friends form their own software company, Microsoft"
+    assert_includes last_response.body, "the two childhood friends"
   end
 
   def test_file_nonexistent
-    post "/users/signin", username: "admin", password: "secret"
     get "/notafile.txt"
     assert_equal 302, last_response.status
+    assert_equal "notafile.txt does not exist", session[:message]
 
     get last_response["Location"]
-    assert_equal 200, last_response.status
-    assert_includes last_response.body, "notafile.txt does not exist"
-
     get "/"
     refute_includes last_response.body, "notafile.txt does not exist"
   end
@@ -126,17 +136,12 @@ class CmsTest < Minitest::Test # tests defined in a class that inherits from min
   end
 
   def test_updating_document
-    post "/users/signin", username: "admin", password: "secret"
     post "/changes.txt", content: "new content"
 
     assert_equal 302, last_response.status
-
-    get last_response["Location"]
-
-    assert_includes last_response.body, "changes.txt has been updated"
+    assert_equal "changes.txt has been updated.", session[:message]
 
     get "/changes.txt"
-
     assert_equal 200, last_response.status
     assert_includes last_response.body, "new content"
   end
@@ -144,15 +149,26 @@ class CmsTest < Minitest::Test # tests defined in a class that inherits from min
   def test_deleting_document
     create_document("test.txt")
 
-    post "/users/signin", username: "admin", password: "secret"
     post"/test.txt/delete"
-
     assert_equal 302, last_response.status
-
-    get last_response["Location"]
-    assert_includes last_response.body, "test.txt has been deleted"
+    assert_equal "test.txt has been deleted.", session[:message]
 
     get "/"
-    refute_includes last_response.body, "test.txt"
+    refute_includes last_response.body, %q(href="/test.txt")
+  end
+
+  def test_create_new_document
+    post "/create", filename: "test.txt"
+    assert_equal 302, last_response.status
+    assert_equal "test.txt has been created.", session[:message]
+
+    get "/"
+    assert_includes last_response.body, "test.txt"
+  end
+
+  def test_create_new_document_without_filename
+    post "/create", filename: ""
+    assert_equal 422, last_response.status
+    assert_includes last_response.body, "A name is required"
   end
 end

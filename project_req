@@ -44,3 +44,21 @@ backend
 - add route to document
     - GET
     - document name will be a parameter in the URL
+
+- index page shows a sign-in button
+  - links to a new page with sign in form
+    - text input labeled "username"
+    - text input labeled "password"
+    - submit button labeled "sign in"
+  - submitting "admin" and "secret" signs in and redirects to index page.
+    - message saying "Welcome!"
+    - at the bottom of the index page
+    - message (text) "Signed in as $USERNAME" followed by a button to sign-out
+  - wrong inputs
+    - redisplay sign in page
+    - message says "Invalid Credentials"
+    - username should now have a default of the incorrect username
+  - signing out
+    - signed out
+    - redirected to index page
+    - message that says, "You have been signed out."

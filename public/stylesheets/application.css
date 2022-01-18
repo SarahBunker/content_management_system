@@ -1,5 +1,3 @@
-
-
 body {
   padding: 1em;
   font-family: sans-serif;
@@ -12,4 +10,9 @@ body {
 
 .inline {
   display: inline;
+}
+
+.user-status {
+  font-style: italic;
+  font-size: 0.9em;
 }

@@ -6,12 +6,14 @@ require 'sinatra/content_for'
 require 'tilt/erubis'
 require 'redcarpet'
 
+USERS = {"admin" => "secret"}
+
 configure do
   enable :sessions
   set :session_secret, 'secret'
 end
 
-root = File.expand_path("..", __FILE__)
+# root = File.expand_path("..", __FILE__)
 
 def render_markdown(file)
   markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
@@ -35,6 +37,14 @@ def data_path
   else
     File.expand_path("../data", __FILE__)
   end
+end
+
+def signed_in?
+  valid_sign_in?(session[:username], session[:password])
+end
+
+def valid_sign_in?(username, password)
+  USERS[username] && USERS[username] == password
 end
 
 get '/' do
@@ -70,6 +80,36 @@ post "/create" do
 
     redirect "/"
   end
+end
+
+get '/users/signin' do
+  erb :signin
+end
+
+post '/users/signin' do
+  @username = params[:username]
+  password = params[:password]
+
+
+  if valid_sign_in?(@username, password)
+    session[:username] = @username
+    session[:password] = password
+    session[:message] = "Welcome"
+    redirect "/"
+  else
+    session[:message] = "Invalid credentials"
+    status 422
+    erb :signin
+  end
+end
+
+post '/users/signout' do
+  session.delete(:username)
+  session.delete(:password)
+
+  session[:message] = "You have been signed out."
+
+  redirect "/"
 end
 
 get '/:filename' do

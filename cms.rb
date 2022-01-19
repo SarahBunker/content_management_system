@@ -159,7 +159,8 @@ get '/users/edit' do
 end
 
 get '/:filename' do
-  file_path = File.join(data_path, params[:filename])
+  file_path = File.join(data_path, File.basename(params[:filename]))
+
   if File.file?(file_path)
     load_file_content(file_path)
   else

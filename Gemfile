@@ -15,3 +15,4 @@ gem "redcarpet"
 gem "fileutils"
 
 gem 'yaml'
+gem 'bcrypt'

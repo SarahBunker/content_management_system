@@ -1,4 +1,3 @@
----
-admin: secret
-bill: billspassword
-sarah: newpassword
+admin: $2a$12$iIk9xegDEFMYUMQpQALE0ONN4FTfzTn1ox.DsOf0YhPqP2/MGQ71.
+bill: $2a$12$I5iak1bDW9iNPlpLbXvUiuWUCAS2eMBl1PnKV.KcCvpU4Lb61gRWi
+sarah: $2a$12$TAqdLev8PnDKva.gE945Ieq9BIPr8WGB7nWdSRz2oATXk1RlbOgGS

@@ -6,6 +6,7 @@ require 'sinatra/content_for'
 require 'tilt/erubis'
 require 'redcarpet'
 require 'yaml'
+require 'bcrypt'
 
 configure do
   enable :sessions
@@ -25,6 +26,15 @@ def load_file_content(path)
     content
   when ".md"
     erb render_markdown(content)
+  end
+end
+
+class PasswordDigester
+  def self.encrypt(password)
+    BCrypt::Password.create(password)
+  end
+  def self.check?(password, encrypted_password)
+    BCrypt::Password.new(encrypted_password) == password
   end
 end
 
@@ -55,7 +65,7 @@ end
 
 def valid_sign_in?(username, password)
   credentials = YAML.load(File.read("users.yml"))
-  credentials[username] && credentials[username] == password
+  credentials[username] && PasswordDigester.check?(password, credentials[username])
 end
 
 def require_signed_in_user
@@ -83,7 +93,6 @@ get '/' do
   end
 
   erb :index
-  # users = YAML.load(File.read("users.yml")).to_s
 end
 
 get "/new" do
@@ -145,7 +154,8 @@ end
 get '/users/edit' do
   require_signed_in_admin
 
-  File.read("users.yml")
+  @users = File.read("users.yml").split("\n").map {|line| line.split(": ") }
+  erb :users
 end
 
 get '/:filename' do

@@ -22,3 +22,7 @@
 <% else %>
   <p class="user-status"><a href="/users/signin">Sign In</a></p>
 <% end %>
+
+<% if signed_in_admin? %>
+  <a href="/users/edit">Edit Users</a>
+<% end %>

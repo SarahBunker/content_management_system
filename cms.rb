@@ -5,15 +5,12 @@ require 'sinatra/reloader' # if development?
 require 'sinatra/content_for'
 require 'tilt/erubis'
 require 'redcarpet'
-
-USERS = {"admin" => "secret"}
+require 'yaml'
 
 configure do
   enable :sessions
   set :session_secret, 'secret'
 end
-
-# root = File.expand_path("..", __FILE__)
 
 def render_markdown(file)
   markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
@@ -31,6 +28,15 @@ def load_file_content(path)
   end
 end
 
+def load_user_credentials
+  credentials_path = if ENV["RACK_ENV"] == "test"
+    File.expand_path("../test/users.yml", __FILE__)
+  else
+    File.expand_path("../users.yml", __FILE__)
+  end
+  YAML.load_file_content(credentials_path)
+end
+
 def data_path
   if ENV["RACK_ENV"] == "test"
     File.expand_path("../test/data", __FILE__)
@@ -43,16 +49,31 @@ def signed_in?
   valid_sign_in?(session[:username], session[:password])
 end
 
-def valid_sign_in?(username, password)
-  USERS[username] && USERS[username] == password
+def signed_in_admin?
+  signed_in? && session[:username] == "admin"
 end
 
+def valid_sign_in?(username, password)
+  credentials = YAML.load(File.read("users.yml"))
+  credentials[username] && credentials[username] == password
+end
 
-def restricted_action_check
+def require_signed_in_user
   unless signed_in?
     session[:message] = "You must be signed in to do that."
     redirect "/"
   end
+end
+
+def require_signed_in_admin
+  unless signed_in_admin?
+    session[:message] = "You must be signed in as admin to do that."
+    redirect "/"
+  end
+end
+
+def error_for_file_path(filename)
+  "#{filename}: does not exist" if File.file?(filename)
 end
 
 get '/' do
@@ -62,20 +83,17 @@ get '/' do
   end
 
   erb :index
-end
-
-def error_for_file_path(filename)
-  "#{filename}: does not exist" if File.file?(filename)
+  # users = YAML.load(File.read("users.yml")).to_s
 end
 
 get "/new" do
-  restricted_action_check
+  require_signed_in_user
 
   erb :new
 end
 
 post "/create" do
-  restricted_action_check
+  require_signed_in_user
 
   @filename = params[:filename].to_s.strip
 
@@ -124,6 +142,12 @@ post '/users/signout' do
   redirect "/"
 end
 
+get '/users/edit' do
+  require_signed_in_admin
+
+  File.read("users.yml")
+end
+
 get '/:filename' do
   file_path = File.join(data_path, params[:filename])
   if File.file?(file_path)
@@ -135,7 +159,7 @@ get '/:filename' do
 end
 
 get "/:filename/edit" do
-  restricted_action_check
+  require_signed_in_user
 
   @filename = params[:filename]
   file_path = File.join(data_path, @filename)
@@ -150,7 +174,7 @@ get "/:filename/edit" do
 end
 
 post "/:filename/delete" do
-  restricted_action_check
+  require_signed_in_user
 
   @filename = params[:filename]
   file_path = File.join(data_path, @filename)
@@ -163,7 +187,7 @@ post "/:filename/delete" do
 end
 
 post "/:filename" do
-  restricted_action_check
+  require_signed_in_user
 
   @filename = params[:filename]
   file_path = File.join(data_path, @filename)

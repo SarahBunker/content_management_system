@@ -13,3 +13,5 @@ gem "rack-test"
 gem "redcarpet"
 
 gem "fileutils"
+
+gem 'yaml'
